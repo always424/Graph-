@@ -4,37 +4,12 @@ using namespace std;
 #define N 100005
 
 vector<int> adj[N];
-int vis[N], par[N];
-bool found = false;
-
-void dfs(int u, int parent, int target) {
-    vis[u] = 1;
-    par[u] = parent;
-
-    if(u == target) {
-        found = true;
-        return;
-    }
-
-    for(auto v : adj[u]) {
-        if(!vis[v]) {
-            dfs(v, u, target);
-            if(found) return; // stop recursion if target found
-        }
-    }
-}
+int vis[N];
+int par[N]; 
 
 void naf() {
     int n, m;
     cin >> n >> m;
-
-    // clear previous data
-    for(int i = 0; i <= n; i++) {
-        adj[i].clear();
-        vis[i] = 0;
-        par[i] = -1;
-    }
-    found = false;
 
     for(int i = 0; i < m; i++) {
         int u, v; 
@@ -43,12 +18,30 @@ void naf() {
         adj[v].push_back(u);
     }
 
-    dfs(1, -1, n);
+    queue<int> q;
+    vis[1] = 1;
+    par[1] = -1;
+    q.push(1);
 
-    if(!found) {
+    while(!q.empty()) {
+        int u = q.front();
+        q.pop();
+
+        for(auto v : adj[u]) {
+            if(vis[v]) continue;
+
+                vis[v] = 1;
+                par[v] = u;
+                q.push(v);
+            
+        }
+    }
+
+    if(!vis[n]) {
         cout << "IMPOSSIBLE\n";
         return;
     }
+
 
     vector<int> path;
     for(int u = n; u != -1; u = par[u])
