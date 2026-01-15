@@ -14,11 +14,11 @@ void dfs(int u,int c){
     col[u] = c;
     for(auto v: adj[u]){
         if(vis[v]){
-            if(col[v] == c) continue;
-            else{
-                is_pos = 0;
+            if(col[v] == c) {
                 continue;
+                is_pos = 0;
             }
+            continue;
             
         }
 
