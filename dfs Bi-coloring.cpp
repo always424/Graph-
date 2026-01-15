@@ -15,8 +15,8 @@ void dfs(int u,int c){
     for(auto v: adj[u]){
         if(vis[v]){
             if(col[v] == c) {
-                continue;
                 is_pos = 0;
+                continue;
             }
             continue;
             
