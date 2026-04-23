@@ -4,7 +4,7 @@ void solve(){
     for(int i =0;i<m;i++){
         int u,v,w; cin>>u>>v>>w;
         adj[u].push_back({v,w});
-        adj[v].push_back({w,v});
+        adj[v].push_back({u,w});
     }
     deque<int>dq;
     vector<int>dist(n+1,INT_MAX);
